@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    
+    </h:head>
+    <style>
+        h1{
+            color: red;
+        }
+        h2{
+            color: blue;
+        }
+     
+         
+    </style>
+    <h:body>
+        <h1> Liste des Personnes </h1>
+        <h:form id="forms">
+            <h:inputHidden value="#{Bean1.id}"></h:inputHidden>
+            <h:inputHidden value="#{Bean1.operation}"></h:inputHidden>
+            
+             
+        <h:dataTable value="#{Bean1.persList}" var="o" border="1" style="width:70%;text-align: center;border:1px solid #000;">
+            
+            
+            <h:column>
+                <f:facet name="header"> ID </f:facet>               
+                <h:link value="#{o.idPersonne}">
+                   <f:param name="id" value="#{o.idPersonne}"></f:param>
+                  <f:param name="operation" value="edit"></f:param>
+               </h:link>
+                
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nom </f:facet>
+                <h:outputText value="#{o.prenomPersonne}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Prenom </f:facet>
+                <h:outputText value="#{o.nomPersonne}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Date naissance </f:facet>
+                <h:outputText value="#{o.datenaissPersonne}"></h:outputText>
+            </h:column>
+            
+       <h:column>
+                <f:facet name="header">Supprimer</f:facet>
+                <h:commandLink action="#{Bean1.deletePer()}">
+                    <h:graphicImage value="trash1.png"></h:graphicImage>
+                    <f:param name="id" value="#{o.idPersonne}"></f:param>
+                </h:commandLink>
+                     
+            </h:column>
+          
+        </h:dataTable>
+         
+        
+        <br/>
+        <br/>
+        <br/> 
+        
+  
+ <!-- <h:messages style="border:1px solid green; color:red;padding:5px;width:40%;"></h:messages> --> 
+ 
+ <h2>New Person </h2> 
+<h:outputLabel value="Your last-name  " for="prenom"> </h:outputLabel>
+<h:inputText required="true" requiredMessage="PRENOM est obligatoire !" value="#{Bean1.prenom}" id="prenom"> </h:inputText>
+<h:message style="color:red;" for="prenom"></h:message>
+
+<br/>
+<br/>
+
+<h:outputLabel value="Your first-name  " for="nom"> </h:outputLabel>
+<h:inputText required="true" requiredMessage="NOM est obligatoire !" value="#{Bean1.nom}" id="nom"> </h:inputText>
+<h:message style="color:red;" for="nom"></h:message>
+<br/>
+<br/>
+
+<h:outputLabel value="Your date of birth  " for="dateN"> </h:outputLabel>
+<h:inputText value="#{Bean1.dateN}" id="dateN"> </h:inputText>
+
+<br/>
+<br/>
+<h:commandButton value="Save" action="#{Bean1.Save()}">
+ <f:ajax execute="@form"/>
+
+</h:commandButton>
+
+</h:form>
+
+    </h:body>
+</html>
+
